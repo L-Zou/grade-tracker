@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-const categories = require('./helpers/cmd-helpers.js');
+const course_grade = require('./helpers/cmd-helpers.js');
 
 const argv = yargs
     .usage('Usage: $0 <command> [options]')
@@ -54,5 +54,8 @@ console.log(argv);
 var cmd = argv._[0];
 
 if(cmd == 'add'){
-
+    if(argv.a_name == undefined){
+        argv.a_name = "Assignment"
+    }
+    course_grade.add_grade(argv.course, argv.grade, argv.weight, argv.a_name);
 }
