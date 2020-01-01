@@ -1,0 +1,22 @@
+{
+  "name": "grade-tracker",
+  "version": "1.0.0",
+  "description": "Application for recording grades and what average grade is needed on remaining assignments to obtain a certain overall average",
+  "main": "grade-tracker-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L-Zou/grade-tracker.git"
+  },
+  "author": "Lily Zou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L-Zou/grade-tracker/issues"
+  },
+  "homepage": "https://github.com/L-Zou/grade-tracker#readme",
+  "dependencies": {
+    "yargs": "^15.0.2"
+  }
+}
