@@ -1,6 +1,6 @@
 [
     {
         "subject": "Math",
-        "courses": ["MATH135"]
+        "courses": ["MATH135", "CS135"]
     }
 ]
