@@ -55,16 +55,18 @@ var cmd = argv._[0];
 switch (cmd) {
     case 'add':
         if (argv.grade < 0 || argv.grade > 100 || argv.weight < 0 || argv.weight > 100){
-            console.log("Invalid values.")
+            console.log("Invalid values.");
         }
         else{
             if (argv.a_name == undefined){
-                argv.a_name = "Assignment"
+                argv.a_name = "Assignment";
             }
             
             course_grade.add_grade(argv.course, argv.grade, argv.weight, argv.a_name);
         }
         break;
     case 'list':
+        course_grade.list_grades();
+    case 'rm':
         course_grade.list_grades();
 }
