@@ -1,5 +1,7 @@
 const yargs = require('yargs');
-const course_grade = require('./helpers/cmd-helpers.js');
+const edit_grade = require('./helpers/grades.js');
+const edit_course = require('./helpers/courses.js');
+const edit_subject = require('./helpers/subjects.js');
 
 const argv = yargs
     .usage('Usage: $0 <command> [options]')
@@ -53,6 +55,30 @@ const argv = yargs
         }
     })
     .command ('list', 'List all recorded grades')
+    .command ('rm-all', 'Remove all recorded grades', {
+        course: {
+            describe: 'name of course',
+            alias: 'c',
+            demand: false, 
+            type: 'string'
+        }
+    })
+    .command ('add-subject', 'Add a subject', {
+        subject: {
+            describe: 'name of subject',
+            alias: 's',
+            demand: true, 
+            type: 'string'
+        }
+    })
+    .command ('rm-subject', 'Remove a subject', {
+        subject: {
+            describe: 'name of subject',
+            alias: 's',
+            demand: true, 
+            type: 'string'
+        }
+    })
     .help()
     .alias('help', 'h')
     .argv;
@@ -69,21 +95,27 @@ switch (cmd) {
                 argv.a_name = "Assignment";
             }
             
-            course_grade.add_grade(argv.course, argv.grade, argv.weight, argv.a_name);
+            edit_grade.add_grade(argv.course, argv.grade, argv.weight, argv.a_name);
         }
         break;
     case 'list':
-        course_grade.list_grades();
+        edit_grade.list_grades();
         break;
     case 'rm':
-        course_grade.rm_grade(argv.course, argv.id);
+        edit_grade.rm_grade(argv.course, argv.id);
         break;
     case 'rm-all':
         if (argv.course == undefined){
-            course_grade.rm_all_grade();
+            edit_grade.rm_all_grade();
         }
         else{
-            course_grade.rm_all_grade_course(argv.course);
+            edit_grade.rm_all_grade_course(argv.course);
         }
+        break;
+    case 'add-subject':
+        edit_subject.add_subject(argv.subject)
+        break;
+    case 'rm-subject':
+        edit_subject.rm_subject(argv.subject)
         break;
 }

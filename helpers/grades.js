@@ -8,13 +8,8 @@ let add_grade = (course, grade, weight, a_name) => {
         console.log("Course does not exist!");
     }
     else{
-        let grade_id = undefined
-        if (grade_data[course].length == 0)
-            grade_id = 1;
-        else
-            grade_id = grade_data[course][grade_data[course].length - 1].id +1;
         let input = {
-            id: grade_id, 
+            id: undefined,
             assignment_name: a_name,
             average: grade,
             weight: weight
@@ -45,8 +40,11 @@ let list_grades = () => {
         console.log("-----------------------------------------------\n");
         for(let j = 0 ; j < subject_data[i].courses.length ; j++){
             console.log(subject_data[i].courses[j]);
-            console.log("...................................\n");
+            console.log("...................................");
             let data = grade_data[subject_data[i].courses[j]];
+            for (let k = 0 ; k < data.length ; k++){
+                data[k].id = (k + 1);
+            }
             let columns = columnify(data);
             console.log(columns);
 
@@ -65,7 +63,7 @@ let calc_average = (grade_data) => {
         weight_total += grade_data[l].weight
     }
     return Math.round((total/weight_total) *100)
-}
+};
 
 let rm_grade = (course, id) => {
     let data = fs.readFileSync('./data/course-grade.json','utf8');
