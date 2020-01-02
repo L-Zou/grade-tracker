@@ -2,6 +2,9 @@
   "name": "grade-tracker",
   "version": "1.0.0",
   "description": "Application for recording grades and what average grade is needed on remaining assignments to obtain a certain overall average",
+  "bin": {
+    "gt": "./grade-tracker-app.js"
+  },
   "main": "grade-tracker-app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

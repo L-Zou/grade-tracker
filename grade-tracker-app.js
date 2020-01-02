@@ -1,10 +1,11 @@
+#!/usr/bin/env node
 const yargs = require('yargs');
 const edit_grade = require('./helpers/grades.js');
 const edit_course = require('./helpers/courses.js');
 const edit_subject = require('./helpers/subjects.js');
 
 const argv = yargs
-    .usage('Usage: $0 <command> [options]')
+    .usage('Usage: gt <command> [options]')
     .example('$0 add -c MATH135 -g 60 -w 25', 'Record an assignment grade')
     .command('add', 'Record an assignment grade', {
         course: {

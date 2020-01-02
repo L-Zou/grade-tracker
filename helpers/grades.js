@@ -40,15 +40,19 @@ let list_grades = () => {
         console.log("-----------------------------------------------\n");
         for(let j = 0 ; j < subject_data[i].courses.length ; j++){
             console.log(subject_data[i].courses[j]);
-            console.log("...................................");
+            console.log("...................................\n");
             let data = grade_data[subject_data[i].courses[j]];
             for (let k = 0 ; k < data.length ; k++){
                 data[k].id = (k + 1);
             }
             let columns = columnify(data);
             console.log(columns);
-
+            
             let avg = calc_average(data);
+
+            if (isNaN(avg))
+                avg = 0;
+
             console.log("...................................");
             console.log("Current Average:   \t   " +avg + "\n");
         }
