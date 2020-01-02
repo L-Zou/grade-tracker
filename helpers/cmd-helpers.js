@@ -109,9 +109,25 @@ let rm_all_grade = () => {
     }); 
 };
 
+let rm_all_grade_course = (course_name) => {
+    let g_data = fs.readFileSync('./data/course-grade.json','utf8');
+
+    let grade_data = JSON.parse(g_data);
+    grade_data[course_name] = []
+    json = JSON.stringify(grade_data); 
+    fs.writeFile('./data/course-grade.json', json, 'utf8', (err) => {
+        if (err)
+            console.log ('error', err.message, err.stack);
+        else
+            console.log('Grades successfully deleted');
+    }); 
+};
+
+
 module.exports = {
     add_grade,
     list_grades,
     rm_grade,
-    rm_all_grade
+    rm_all_grade,
+    rm_all_grade_course
 };

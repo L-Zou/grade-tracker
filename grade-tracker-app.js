@@ -79,6 +79,11 @@ switch (cmd) {
         course_grade.rm_grade(argv.course, argv.id);
         break;
     case 'rm-all':
-        course_grade.rm_all_grade();
+        if (argv.course == undefined){
+            course_grade.rm_all_grade();
+        }
+        else{
+            course_grade.rm_all_grade_course(argv.course);
+        }
         break;
 }
