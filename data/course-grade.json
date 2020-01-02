@@ -1,2 +1,1 @@
-{"MATH135":[{"id":1,"assignment_name":"Midterm","average":60,"weight":25},{"id":2,"assignment_name":"Assignment","average":10,"weight":10}],
-"CS135":[{"id":1,"assignment_name":"Midterm","average":60,"weight":25},{"id":2,"assignment_name":"Assignment","average":10,"weight":10}]}
+{"MATH135":[{"id":1,"assignment_name":"Assignment","average":60,"weight":20},{"id":2,"assignment_name":"Assignment","average":60,"weight":20}],"CS135":[]}

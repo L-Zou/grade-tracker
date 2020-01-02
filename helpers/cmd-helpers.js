@@ -8,7 +8,11 @@ let add_grade = (course, grade, weight, a_name) => {
         console.log("Course does not exist!");
     }
     else{
-        let grade_id = grade_data[course].length + 1;
+        let grade_id = undefined
+        if (grade_data[course].length == 0)
+            grade_id = 1;
+        else
+            grade_id = grade_data[course][grade_data[course].length - 1].id +1;
         let input = {
             id: grade_id, 
             assignment_name: a_name,
@@ -63,8 +67,51 @@ let calc_average = (grade_data) => {
     return Math.round((total/weight_total) *100)
 }
 
+let rm_grade = (course, id) => {
+    let data = fs.readFileSync('./data/course-grade.json','utf8');
+    let grade_data = JSON.parse(data);
+    if (grade_data[course] == undefined){
+        console.log("Course does not exist!");
+    }
+    else if (grade_data[course].length < id || id < 0){
+        console.log("ID number does not exist!")
+    }
+    else{
+        grade_data[course].splice((id-1), 1);
+        json = JSON.stringify(grade_data); 
+        fs.writeFile('./data/course-grade.json', json, 'utf8', (err) => {
+            if (err)
+                console.log ('error', err.message, err.stack);
+            else
+                console.log('Grade successfully deleted');
+        }); 
+    }
+};
+
+let rm_all_grade = () => {
+    let s_data = fs.readFileSync('./data/subject-course.json','utf8');
+    let g_data = fs.readFileSync('./data/course-grade.json','utf8');
+
+    let subject_data = JSON.parse(s_data);
+    let grade_data = JSON.parse(g_data);
+    for (let m = 0 ; m < subject_data.length ; m++){
+        for (let n = 0 ; n < subject_data[m].courses.length ; n++){
+            console.log(grade_data[subject_data[m].courses[n]])
+            grade_data[subject_data[m].courses[n]] = []
+        }
+    }
+    json = JSON.stringify(grade_data); 
+    fs.writeFile('./data/course-grade.json', json, 'utf8', (err) => {
+        if (err)
+            console.log ('error', err.message, err.stack);
+        else
+            console.log('Grades successfully deleted');
+    }); 
+};
 
 module.exports = {
     add_grade,
-    list_grades
+    list_grades,
+    rm_grade,
+    rm_all_grade
 };

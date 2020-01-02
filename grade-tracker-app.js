@@ -34,7 +34,14 @@ const argv = yargs
         id: {
             describe: 'assignment grade id',
             demand: true, 
+            alias: 'i',
             type: 'number'
+        },
+        course: {
+            describe: 'name of course',
+            alias: 'c',
+            demand: true, 
+            type: 'string'
         }
     })
     .command ('rm-all', 'Remove all recorded grades', {
@@ -67,6 +74,11 @@ switch (cmd) {
         break;
     case 'list':
         course_grade.list_grades();
+        break;
     case 'rm':
-        course_grade.list_grades();
+        course_grade.rm_grade(argv.course, argv.id);
+        break;
+    case 'rm-all':
+        course_grade.rm_all_grade();
+        break;
 }
