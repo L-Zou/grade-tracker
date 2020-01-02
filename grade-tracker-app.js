@@ -79,6 +79,34 @@ const argv = yargs
             type: 'string'
         }
     })
+    .command ('add-course', 'Add a course', {
+        subject: {
+            describe: 'name of subject',
+            alias: 's',
+            demand: true, 
+            type: 'string'
+        },
+        course: {
+            describe: 'name of course',
+            alias: 'c',
+            demand: true, 
+            type: 'string'
+        }
+    })
+    .command ('rm-course', 'Remove a course', {
+        subject: {
+            describe: 'name of subject',
+            alias: 's',
+            demand: true, 
+            type: 'string'
+        },
+        course: {
+            describe: 'name of course',
+            alias: 'c',
+            demand: true, 
+            type: 'string'
+        }
+    })
     .help()
     .alias('help', 'h')
     .argv;
@@ -117,5 +145,11 @@ switch (cmd) {
         break;
     case 'rm-subject':
         edit_subject.rm_subject(argv.subject)
+        break;
+    case 'add-course':
+        edit_course.add_course(argv.subject, argv.course)
+        break;
+    case 'rm-course':
+        edit_course.rm_course(argv.subject, argv.course)
         break;
 }
