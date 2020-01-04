@@ -6,7 +6,7 @@ const edit_subject = require('./helpers/subjects.js');
 
 const argv = yargs
     .usage('Usage: gt <command> [options]')
-    .example('$0 add -c MATH135 -g 60 -w 25', 'Record an assignment grade')
+    .example('gt add -c MATH135 -g 60 -w 25', 'Record an assignment grade')
     .command('add', 'Record an assignment grade', {
         course: {
             describe: 'name of course',
@@ -108,6 +108,20 @@ const argv = yargs
             type: 'string'
         }
     })
+    .command ('git-gud', 'Calculate assignment grades needed in order to obtain certain average', {
+        course: {
+            describe: 'name of course', 
+            alias: 'c', 
+            demand: true, 
+            type: 'string'
+        },
+        goal: {
+            describe: 'goal average', 
+            alias: 'g',
+            demand: true, 
+            type: 'number'
+        }
+    })
     .help()
     .alias('help', 'h')
     .argv;
@@ -152,5 +166,8 @@ switch (cmd) {
         break;
     case 'rm-course':
         edit_course.rm_course(argv.subject, argv.course)
+        break;
+    case 'git-gud':
+        edit_grade.goal_average(argv.course, argv.goal)
         break;
 }

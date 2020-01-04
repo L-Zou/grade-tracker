@@ -9,7 +9,7 @@ let add_grade = (course, grade, weight, a_name) => {
     }
     else{
         let input = {
-            id: undefined,
+            id: '',
             assignment_name: a_name,
             average: grade,
             weight: weight
@@ -40,7 +40,7 @@ let list_grades = () => {
         console.log("-----------------------------------------------\n");
         for(let j = 0 ; j < subject_data[i].courses.length ; j++){
             console.log(subject_data[i].courses[j]);
-            console.log("...................................\n");
+            console.log("...................................");
             let data = grade_data[subject_data[i].courses[j]];
             for (let k = 0 ; k < data.length ; k++){
                 data[k].id = (k + 1);
@@ -54,19 +54,17 @@ let list_grades = () => {
                 avg = 0;
 
             console.log("...................................");
-            console.log("Current Average:   \t   " +avg + "\n");
+            console.log("Current Average:   \t   " + avg + "%\n");
         }
     }    
 };
 
 let calc_average = (grade_data) => {
     var total = 0;
-    var weight_total = 0;
     for (let l = 0 ; l < grade_data.length ; l++){
-        total += (grade_data[l].average/100) * grade_data[l].weight
-        weight_total += grade_data[l].weight
+        total += grade_data[l].average * (grade_data[l].weight/100)
     }
-    return Math.round((total/weight_total) *100)
+    return Math.round(total)
 };
 
 let rm_grade = (course, id) => {
@@ -125,11 +123,26 @@ let rm_all_grade_course = (course_name) => {
     }); 
 };
 
+let goal_average = (course, goal) => {
+    let g_data = fs.readFileSync('./data/course-grade.json', 'utf8');
+
+    let grade_data = JSON.parse(g_data);
+
+    let current_weight = 0;
+    let current_avg = calc_average(grade_data[course]);
+
+    for (let i = 0 ; i < grade_data[course].length ; i++){
+        current_weight += grade_data[course][i].weight
+    }
+    console.log("You need an average of " + Math.round((goal - current_avg)/(1 -current_weight/100)) + 
+    "% on the rest of the course in order to obtain an overall average of " + goal + "% in " + course);
+};
 
 module.exports = {
     add_grade,
     list_grades,
     rm_grade,
     rm_all_grade,
-    rm_all_grade_course
+    rm_all_grade_course,
+    goal_average
 };
