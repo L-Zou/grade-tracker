@@ -23,11 +23,11 @@ ID ASSIGNMENT_NAME AVERAGE WEIGHT
 Current Average:           24%
 ```
 ## installation
-Clone the repository.
+Clone the repository:
 ```
 git clone https://github.com/L-Zou/grade-tracker.git
 ```
-Navigate to the grade-tracker repository and install the required npm modules.
+Go to the cloned repository (grade-tracker) and install the required npm modules with: 
 ```
 npm install
 ```
